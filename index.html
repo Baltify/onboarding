@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baltify – Kunden Onboarding</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1d6ae5;
+  --blue-dark: #1455c0;
+  --blue-deeper: #0d3a9e;
+  --orange: #ff6b2b;
+  --ink: #0d0d0d;
+  --grey: #6b7280;
+  --light: #f4f7ff;
+  --border: #e5e9f5;
+  --white: #ffffff;
+  --navy: #0f1e3d;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: #eef2fb;
+  min-height: 100vh;
+  color: var(--ink);
+}
+
+/* ======= TOPBAR ======= */
+.topbar {
+  background: var(--navy);
+  padding: 0 40px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.3);
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--blue);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon svg {
+  width: 20px; height: 20px;
+  fill: white;
+}
+
+.logo-text-wrap {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-main {
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.logo-sub-text {
+  font-size: 9px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+
+.secure-dot {
+  width: 7px; height: 7px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+/* ======= HERO ======= */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #162d5e 50%, var(--blue-deeper) 100%);
+  padding: 60px 40px 52px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wave lines like the logo */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 600px 300px at 80% 120%, rgba(29,106,229,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 400px at -10% 50%, rgba(255,107,43,0.08) 0%, transparent 70%);
+}
+
+.wave-lines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.12;
+}
+
+.wave-lines svg {
+  position: absolute;
+  bottom: -20px;
+  right: -40px;
+  width: 70%;
+  height: auto;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  padding: 7px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--orange);
+}
+
+.hero h1 {
+  font-size: 38px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.18;
+  margin-bottom: 14px;
+}
+
+.hero h1 .muted {
+  color: rgba(255,255,255,0.4);
+}
+
+.hero p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 400;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ======= PROGRESS ======= */
+.progress-wrap {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  overflow-x: auto;
+}
+
+.progress-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 0;
+  gap: 0;
+  min-width: 500px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c0c8d8;
+  white-space: nowrap;
+}
+
+.step.active { color: var(--blue); }
+.step.done { color: #22c55e; }
+
+.step-num {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: #f0f4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #c0c8d8;
+  flex-shrink: 0;
+  border: 2px solid #e5e9f5;
+}
+
+.step.active .step-num {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  box-shadow: 0 4px 12px rgba(29,106,229,0.3);
+}
+
+.step.done .step-num {
+  background: #22c55e;
+  color: #fff;
+  border-color: #22c55e;
+}
+
+.step-line {
+  width: 36px;
+  height: 2px;
+  background: #e5e9f5;
+  margin: 0 6px;
+  flex-shrink: 0;
+}
+
+/* ======= MAIN ======= */
+.main {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 40px 20px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ======= CARDS ======= */
+.card {
+  background: var(--white);
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(29,106,229,0.04), 0 1px 4px rgba(0,0,0,0.03);
+  animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card:nth-child(1) { animation-delay: 0s; }
+.card:nth-child(2) { animation-delay: 0.06s; }
+.card:nth-child(3) { animation-delay: 0.12s; }
+.card:nth-child(4) { animation-delay: 0.18s; }
+.card:nth-child(5) { animation-delay: 0.24s; }
+
+.card-header {
+  padding: 22px 28px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fafbff;
+}
+
+.card-num {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-icon svg {
+  width: 19px; height: 19px;
+  stroke: var(--blue);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.card-titles { flex: 1; }
+
+.card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.card-subtitle {
+  font-size: 12px;
+  color: var(--grey);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.card-body {
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ======= FORM ELEMENTS ======= */
+.field { display: flex; flex-direction: column; gap: 7px; }
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.req { color: var(--orange); }
+.opt { color: #c0c8d8; font-weight: 400; font-size: 11px; }
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  background: #fafbff;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--blue);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(29,106,229,0.08);
+}
+
+input::placeholder, textarea::placeholder {
+  color: #c8d0e0;
+  font-weight: 400;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 96px;
+  line-height: 1.6;
+}
+
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+/* Tags */
+.tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 8px 15px;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--grey);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+  background: #fafbff;
+}
+
+.tag:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--light);
+}
+
+.tag.selected {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(29,106,229,0.25);
+}
+
+/* Upload */
+.upload-area {
+  border: 2px dashed #d0d9f0;
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fafbff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-area:hover {
+  border-color: var(--blue);
+  background: var(--light);
+}
+
+.upload-icon {
+  width: 48px; height: 48px;
+  background: var(--light);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-icon svg {
+  width: 22px; height: 22px;
+  stroke: var(--blue);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.upload-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.upload-sub {
+  font-size: 11px;
+  color: var(--grey);
+  font-weight: 400;
+}
+
+.upload-btn {
+  display: inline-block;
+  padding: 7px 18px;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* ======= CTA ======= */
+.cta-card {
+  background: linear-gradient(135deg, var(--navy) 0%, #162d5e 60%, var(--blue-deeper) 100%);
+  border-radius: 18px;
+  padding: 36px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+.cta-card::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  background: rgba(29,106,229,0.2);
+  border-radius: 50%;
+}
+
+.cta-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  position: relative;
+  z-index: 2;
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+.btn-submit {
+  padding: 16px 48px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 24px rgba(29,106,229,0.5);
+  position: relative;
+  z-index: 2;
+  letter-spacing: 0.3px;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(29,106,229,0.6);
+  background: #2274f5;
+}
+
+.btn-submit svg {
+  width: 18px; height: 18px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cta-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-note svg {
+  width: 13px; height: 13px;
+  stroke: #22c55e;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ======= FOOTER ======= */
+.footer {
+  text-align: center;
+  padding: 28px;
+  font-size: 12px;
+  color: #a0aec0;
+}
+.footer a { color: var(--blue); text-decoration: none; }
+
+/* ======= MOBILE ======= */
+@media (max-width: 600px) {
+  .topbar { padding: 0 20px; }
+  .hero { padding: 44px 24px 40px; }
+  .hero h1 { font-size: 28px; }
+  .card-body { padding: 20px; }
+  .card-header { padding: 18px 20px; }
+  .field-row { grid-template-columns: 1fr; }
+  .progress-wrap { padding: 0 16px; }
+  .main { padding: 24px 16px 80px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo-wrap">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    </div>
+    <div class="logo-text-wrap">
+      <div class="logo-main">Baltify</div>
+      <div class="logo-sub-text">Marketing</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="secure-dot"></div>
+    Sicheres Formular
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wave-lines">
+    <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,200 C150,100 300,300 450,200 C600,100 700,250 800,180" stroke="white" stroke-width="1.5" fill="none"/>
+      <path d="M0,240 C120,140 280,320 430,230 C580,140 700,280 800,210" stroke="white" stroke-width="1" fill="none"/>
+      <path d="M0,280 C100,180 260,350 410,260 C560,170 690,310 800,240" stroke="white" stroke-width="0.7" fill="none"/>
+      <path d="M0,160 C180,60 320,280 470,170 C620,60 710,220 800,150" stroke="white" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Kunden-Onboarding
+    </div>
+    <h1>Willkommen bei Baltify.<br><span class="muted">Lass uns loslegen.</span></h1>
+    <p>Füll das Formular einmalig aus – so kann ich deine Website und dein Marketing von Anfang an genau auf dich zuschneiden.</p>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="step active"><div class="step-num">1</div> Basics</div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-num">2</div> Zielgruppe</div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-num">3</div> Design</div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-num">4</div> Inhalte</div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-num">5</div> Technik</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- 1. BASICS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">1</div>
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="card-titles">
+        <div class="card-title">Unternehmen & Kontakt</div>
+        <div class="card-subtitle">Grundlegende Infos zu dir und deinem Unternehmen</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="field-row">
+        <div class="field">
+          <label>Firmenname <span class="req">*</span></label>
+          <input type="text" placeholder="z.B. Müller Elektro GmbH">
+        </div>
+        <div class="field">
+          <label>Ansprechpartner <span class="req">*</span></label>
+          <input type="text" placeholder="Vor- und Nachname">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>E-Mail <span class="req">*</span></label>
+          <input type="email" placeholder="deine@email.de">
+        </div>
+        <div class="field">
+          <label>Telefon <span class="opt">optional</span></label>
+          <input type="tel" placeholder="+49 ...">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Branche / Tätigkeit <span class="req">*</span></label>
+          <input type="text" placeholder="z.B. Elektroinstallation, Coaching ...">
+        </div>
+        <div class="field">
+          <label>Ort / Stadt <span class="req">*</span></label>
+          <input type="text" placeholder="z.B. Gummersbach">
+        </div>
+      </div>
+      <div class="field">
+        <label>Aktuelle Website <span class="opt">optional</span></label>
+        <input type="url" placeholder="https://...">
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ZIELGRUPPE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">2</div>
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
+      <div class="card-titles">
+        <div class="card-title">Zielgruppe & Leistungen</div>
+        <div class="card-subtitle">Wer sind deine Kunden und was bietest du an?</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>Wer sind deine Kunden? <span class="req">*</span></label>
+        <textarea placeholder="z.B. Eigenheimbesitzer 35–60 Jahre, die eine neue Elektroanlage brauchen ..."></textarea>
+      </div>
+      <div class="field">
+        <label>Welches Problem löst du für sie? <span class="req">*</span></label>
+        <textarea placeholder="Was ist der größte Nutzen den deine Kunden durch dich haben?"></textarea>
+      </div>
+      <div class="field">
+        <label>Deine Leistungen <span class="req">*</span></label>
+        <textarea placeholder="Liste alle Leistungen auf die auf der Website erscheinen sollen ..."></textarea>
+      </div>
+      <div class="field">
+        <label>Hauptleistung / Stärkstes Angebot <span class="opt">optional</span></label>
+        <input type="text" placeholder="Was soll im Vordergrund stehen?">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. DESIGN -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">3</div>
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <div class="card-titles">
+        <div class="card-title">Design & Stil</div>
+        <div class="card-subtitle">Wie soll deine Website wirken?</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>Wähle Adjektive die zu deiner Marke passen <span class="req">*</span></label>
+        <div class="tags-wrap">
+          <div class="tag" onclick="toggleTag(this)">Modern</div>
+          <div class="tag" onclick="toggleTag(this)">Klassisch</div>
+          <div class="tag" onclick="toggleTag(this)">Vertrauenswürdig</div>
+          <div class="tag" onclick="toggleTag(this)">Premium & exklusiv</div>
+          <div class="tag" onclick="toggleTag(this)">Locker & freundlich</div>
+          <div class="tag" onclick="toggleTag(this)">Professionell & seriös</div>
+          <div class="tag" onclick="toggleTag(this)">Mutig & auffällig</div>
+          <div class="tag" onclick="toggleTag(this)">Minimalistisch</div>
+          <div class="tag" onclick="toggleTag(this)">Warm & nahbar</div>
+          <div class="tag" onclick="toggleTag(this)">Technisch & präzise</div>
+          <div class="tag" onclick="toggleTag(this)">Verspielt & kreativ</div>
+          <div class="tag" onclick="toggleTag(this)">Kraftvoll & dynamisch</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Referenz-Websites <span class="opt">optional</span></label>
+        <textarea placeholder="Links zu Websites deren Stil dir gefällt – auch aus ganz anderen Branchen ..."></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Gewünschte Farben <span class="opt">optional</span></label>
+          <input type="text" placeholder="z.B. Dunkelblau, Gold, Weiß ...">
+        </div>
+        <div class="field">
+          <label>Farben die du NICHT willst <span class="opt">optional</span></label>
+          <input type="text" placeholder="z.B. kein Pink, kein Grün ...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. INHALTE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">4</div>
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div class="card-titles">
+        <div class="card-title">Inhalte & Dateien</div>
+        <div class="card-subtitle">Texte, Fotos und alles was auf die Website soll</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>Über-uns Text <span class="opt">optional – ich schreibe auch</span></label>
+        <textarea placeholder="Wer bist du / wer seid ihr? Geschichte, Werte, Team ..."></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Anzahl Mitarbeiter <span class="opt">optional</span></label>
+          <input type="text" placeholder="z.B. 1, 5, 12 ...">
+        </div>
+        <div class="field">
+          <label>Standorte <span class="opt">optional</span></label>
+          <input type="text" placeholder="z.B. nur Gummersbach">
+        </div>
+      </div>
+      <div class="field">
+        <label>Google-Bewertungen vorhanden?</label>
+        <select>
+          <option value="">Bitte wählen ...</option>
+          <option>Ja – Link folgt</option>
+          <option>Ja – aber kein Link</option>
+          <option>Nein</option>
+        </select>
+      </div>
+      <div class="divider"></div>
+      <div class="field">
+        <label>Logo hochladen <span class="opt">PNG oder SVG bevorzugt</span></label>
+        <div class="upload-area">
+          <div class="upload-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <div class="upload-title">Logo hier ablegen oder klicken</div>
+          <div class="upload-sub">PNG, SVG, PDF · max. 20 MB</div>
+          <div class="upload-btn">Datei auswählen</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Fotos hochladen <span class="opt">Team, Räume, Produkte, Arbeiten ...</span></label>
+        <div class="upload-area">
+          <div class="upload-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <div class="upload-title">Fotos hier ablegen oder klicken</div>
+          <div class="upload-sub">JPG, PNG, WEBP · mehrere Dateien möglich</div>
+          <div class="upload-btn">Dateien auswählen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. TECHNIK -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">5</div>
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div class="card-titles">
+        <div class="card-title">Technik & Ziel</div>
+        <div class="card-subtitle">Was soll die Website für dich leisten?</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>Was soll der Besucher tun? <span class="req">*</span></label>
+        <div class="tags-wrap">
+          <div class="tag" onclick="toggleTag(this)">Anrufen</div>
+          <div class="tag" onclick="toggleTag(this)">Formular ausfüllen</div>
+          <div class="tag" onclick="toggleTag(this)">Termin buchen</div>
+          <div class="tag" onclick="toggleTag(this)">Produkt kaufen</div>
+          <div class="tag" onclick="toggleTag(this)">Angebot anfragen</div>
+          <div class="tag" onclick="toggleTag(this)">Newsletter eintragen</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Besondere Funktionen <span class="opt">optional</span></label>
+        <div class="tags-wrap">
+          <div class="tag" onclick="toggleTag(this)">Online-Shop</div>
+          <div class="tag" onclick="toggleTag(this)">Buchungssystem</div>
+          <div class="tag" onclick="toggleTag(this)">Mehrsprachig</div>
+          <div class="tag" onclick="toggleTag(this)">Blog</div>
+          <div class="tag" onclick="toggleTag(this)">Mitgliederbereich</div>
+          <div class="tag" onclick="toggleTag(this)">Keine besonderen</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Domain bereits vorhanden? <span class="opt">optional</span></label>
+        <input type="text" placeholder="z.B. meinefirma.de – oder noch keine">
+      </div>
+      <div class="field">
+        <label>Was willst du auf keinen Fall?</label>
+        <textarea placeholder="z.B. kein Slider, keine dunklen Farben, kein Popup ..."></textarea>
+      </div>
+      <div class="field">
+        <label>Sonstige Wünsche & Anmerkungen</label>
+        <textarea placeholder="Alles was dir noch wichtig ist ..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-card">
+    <div class="cta-title">Alles ausgefüllt?</div>
+    <div class="cta-sub">Nach dem Absenden bekommst du eine Bestätigung – ich melde mich innerhalb von 24 Stunden bei dir.</div>
+    <button class="btn-submit">
+      Formular absenden
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+    <div class="cta-note">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      Deine Daten landen sicher in meinem Google Drive – nur ich habe Zugriff
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 <a href="#">baltify.de</a> · Alle Angaben vertraulich · <a href="#">Datenschutz</a>
+</div>
+
+<script>
+function toggleTag(el) {
+  el.classList.toggle('selected');
+}
+</script>
+
+</body>
+</html>
